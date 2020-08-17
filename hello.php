@@ -10,4 +10,19 @@ if($var1 > 2){
     }else {
         echo 'No es mayor que 2';
     }
+
+
+    $c= 1;
+    echo $c++;
+    echo $c;
+    echo ++$c;
+    echo $c;
+    
+    $D= 3;
+    $E= 2;   
+
+    echo 32 + 3;
+    
+    echo (2+3);
+
 ?>
