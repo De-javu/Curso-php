@@ -1,14 +1,25 @@
 <?php
 
 class Job {
-    private  $title;
+    private $title;
     public $description;
-    public $visible;
+    public $visible = true;
     public $months;
 
-  public function setTitle($title){
-    $this->title = $title;
+    public function __construct($title, $description)
+    {
+      $this->setTitle =$title;
+      $this->description = $description;
+    }
+
+  public function setTitle($t){
+    if($t == '') {
+           $this->title = 'N/A';
+    } else {
+           $this->title = $t;
+    }
   }
+    
 
    public  function getTitle() {
 
@@ -16,25 +27,35 @@ class Job {
 
   }
 
+  public function getDurationAsString(){
+    $years = floor($this->months / 12);
+    $extraMonths = $this->months % 12;
+
+
+    return " $years years $extraMonths months";
+
+
+  }
+
 }
 
-$job1 = new Job();
-$job1->setTitle('PHP Devoloper');
-$job1->description = 'this is an awasome job!!!';
+$job1 = new Job('PHP Devoloper','this is an awasome job!!!');
+
 $job1->visible = true;
 $job1->months = 16;
 
-$job2 = new Job();
-$job2->setTitle('Python Dev');
-$job2->description = 'this is an awasome job!!!';
-$job2->visible = true;
-$job2->months = 16;
+$job2 = new Job('Python Dev', 'this is an awasome job!!!' );
+$job2->months = 24;
 
+$job3 = new Job('', 'this is an awasome job!!!' );
+
+$job3->months = 32;
 
 $jobs = [
  
        $job1,
-       $job2
+       $job2,
+       $job3
     
 
     // [
@@ -72,15 +93,7 @@ $jobs = [
     // ]
   
      ];
-     function getDuration($months){
-      $years = floor($months / 12);
-      $extraMonths = $months % 12;
-  
-  
-      return " $years years $extraMonths months";
-  
-  
-    }
+     
   
      function printJob($job) {
        
@@ -91,7 +104,7 @@ $jobs = [
       echo '<li class="work-position">';
       echo '<h5>'. $job->getTitle().'</h5>';
       echo '<p>'. $job->description . '</p>';
-      echo '<p>'. getDuration($job->months) . '</p>';
+      echo '<p>'. $job->getDurationAsString() . '</p>';
       echo '<strong>Achievements:</strong>';
       echo '<ul>';
       echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
