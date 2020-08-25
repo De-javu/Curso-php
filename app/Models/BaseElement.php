@@ -1,7 +1,9 @@
 <?php
 
+require_once 'Printable.php';
 
-class BaseElement {
+
+class BaseElement implements printable{
     protected $title;
     public $description;
     public $visible = true;
@@ -38,4 +40,7 @@ class BaseElement {
 
   }
 
+  public function getDescription() {
+    return $this->description;
+}
 }
